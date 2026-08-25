@@ -1,0 +1,700 @@
+/* ******************** Reset css ******************** */
+*,
+*::after,
+*::before {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+a {
+  text-decoration: none;
+}
+li {
+  list-style: none;
+}
+
+/* ******************** Font ******************** */
+.vazirmatn-font {
+  font-family: "Vazirmatn", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: normal;
+  font-style: normal;
+}
+
+/* ******************** Colors ******************** */
+:root {
+  /* ═══════════════════════════════════════════
+     رنگ‌های اصلی (Primary) — طیف آبی
+     ═══════════════════════════════════════════ */
+  --color-primary-50: #eff6ff;
+  --color-primary-100: #dbeafe;
+  --color-primary-200: #bfdbfe;
+  --color-primary-300: #93c5fd;
+  --color-primary-400: #60a5fa;
+  --color-primary-500: #3b82f6;
+  --color-primary-600: #2563eb;
+  --color-primary-700: #1d4ed8;
+  --color-primary-800: #1e40af;
+  --color-primary-900: #1e3a8a;
+  --color-primary-950: #172554;
+
+  --color-primary: var(--color-primary-600);
+  --color-primary-hover: var(--color-primary-700);
+  --color-primary-active: var(--color-primary-800);
+  --color-primary-light: var(--color-primary-100);
+  --color-primary-subtle: var(--color-primary-50);
+
+  /* ═══════════════════════════════════════════
+     رنگ‌های خنثی (Neutral) — خاکستری با ته‌مایه آبی
+     ═══════════════════════════════════════════ */
+  --color-neutral-50: #f8fafc;
+  --color-neutral-100: #f1f5f9;
+  --color-neutral-200: #e2e8f0;
+  --color-neutral-300: #cbd5e1;
+  --color-neutral-400: #94a3b8;
+  --color-neutral-500: #64748b;
+  --color-neutral-600: #475569;
+  --color-neutral-700: #334155;
+  --color-neutral-800: #1e293b;
+  --color-neutral-900: #0f172a;
+  --color-neutral-950: #020617;
+
+  /* ═══════════════════════════════════════════
+     رنگ‌های معنایی (Semantic)
+     ═══════════════════════════════════════════ */
+  --color-success: #22c55e;
+  --color-success-light: #dcfce7;
+  --color-success-dark: #15803d;
+
+  --color-warning: #f59e0b;
+  --color-warning-light: #fef3c7;
+  --color-warning-dark: #b45309;
+
+  --color-error: #ef4444;
+  --color-error-light: #fee2e2;
+  --color-error-dark: #b91c1c;
+
+  --color-info: #06b6d4;
+  --color-info-light: #cffafe;
+  --color-info-dark: #0e7490;
+
+  /* ═══════════════════════════════════════════
+     رنگ‌های پس‌زمینه و سطوح (Background & Surface)
+     ═══════════════════════════════════════════ */
+  --bg-body: var(--color-neutral-50);
+  --bg-surface: #ffffff;
+  --bg-surface-raised: var(--color-neutral-100);
+  --bg-surface-sunken: var(--color-neutral-200);
+  --bg-overlay: rgba(15, 23, 42, 0.6);
+
+  /* ═══════════════════════════════════════════
+     رنگ‌های متن (Typography)
+     ═══════════════════════════════════════════ */
+  --text-primary: var(--color-neutral-900);
+  --text-secondary: var(--color-neutral-600);
+  --text-tertiary: var(--color-neutral-400);
+  --text-inverse: #ffffff;
+  --text-link: var(--color-primary-600);
+  --text-link-hover: var(--color-primary-700);
+  --text-disabled: var(--color-neutral-300);
+
+  /* ═══════════════════════════════════════════
+     حاشیه‌ها و خطوط جداکننده (Borders)
+     ═══════════════════════════════════════════ */
+  --border-default: var(--color-neutral-200);
+  --border-strong: var(--color-neutral-300);
+  --border-focus: var(--color-primary-500);
+  --border-subtle: var(--color-neutral-100);
+
+  /* ═══════════════════════════════════════════
+     سایه‌ها (Shadows) — با ته‌مایه آبی
+     ═══════════════════════════════════════════ */
+  --shadow-xs: 0 1px 2px rgba(30, 64, 175, 0.05);
+  --shadow-sm:
+    0 1px 3px rgba(30, 64, 175, 0.08), 0 1px 2px rgba(30, 64, 175, 0.06);
+  --shadow-md:
+    0 4px 6px rgba(30, 64, 175, 0.07), 0 2px 4px rgba(30, 64, 175, 0.06);
+  --shadow-lg:
+    0 10px 15px rgba(30, 64, 175, 0.08), 0 4px 6px rgba(30, 64, 175, 0.05);
+  --shadow-xl:
+    0 20px 25px rgba(30, 64, 175, 0.1), 0 8px 10px rgba(30, 64, 175, 0.04);
+  --shadow-focus: 0 0 0 3px rgba(59, 130, 246, 0.35);
+
+  /* ═══════════════════════════════════════════
+     رنگ‌های گرادیان (Gradients)
+     ═══════════════════════════════════════════ */
+  --gradient-primary: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+  --gradient-hero: linear-gradient(
+    160deg,
+    #eff6ff 0%,
+    #dbeafe 50%,
+    #bfdbfe 100%
+  );
+  --gradient-dark: linear-gradient(135deg, #1e3a8a 0%, #0f172a 100%);
+  --gradient-accent: linear-gradient(135deg, #06b6d4 0%, #3b82f6 100%);
+
+  /* ═══════════════════════════════════════════
+     شفافیت و حالت‌ها (Opacity & States)
+     ═══════════════════════════════════════════ */
+  --opacity-disabled: 0.5;
+  --opacity-hover: 0.85;
+  --primary-alpha-10: rgba(37, 99, 235, 0.1);
+  --primary-alpha-20: rgba(37, 99, 235, 0.2);
+}
+
+/* ******************** publice ******************** */
+html {
+  font-style: normal;
+  font-family: vazirmatn;
+  scroll-behavior: smooth;
+}
+body {
+  background-color: var(--color-primary-500);
+  color: var(--color-primary-100);
+}
+
+/* ******************** Header ******************** */
+.head {
+  height: 14vh;
+  width: 100%;
+  background-color: var(--color-primary-500);
+  transition: background-color 350ms ease-in-out 200ms;
+  position: fixed;
+  z-index: 10;
+}
+.head:hover {
+  background-color: var(--color-primary-700);
+  transition: background-color 250ms ease-in-out;
+}
+.head_box {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.nav_bar {
+  height: 100%;
+  width: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.nav_bar_items {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  align-content: center;
+  flex-wrap: wrap;
+}
+
+.nav_bar_items a {
+  color: var(--color-primary-50);
+  background-color: var(--color-primary-600);
+  padding: 0.5rem 2.5rem;
+  border-radius: 20px;
+  font-size: large;
+
+  box-shadow: var(--color-neutral-50) 2px 3px 4px;
+
+  transition: background-color 100ms ease-in-out;
+}
+
+.nav_bar_items a:hover {
+  transition: background-color 100ms ease-in-out;
+  color: var(--color-primary-100);
+  box-shadow: var(--color-neutral-300) 2px 3px 4px;
+  background-color: var(--color-primary-800);
+}
+/* ******************** Main ******************** */
+.main_container {
+  padding: 6rem 5rem;
+}
+
+.hero {
+  padding: 3rem;
+  height: 39rem;
+  width: 100%;
+  display: flex;
+  gap: 3rem;
+}
+
+.hero_header_container {
+  width: 70%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.hero_main_title {
+  font-size: 7rem;
+  scroll-margin-top: 6.5rem;
+}
+
+.hero_title {
+  font-size: 2rem;
+}
+
+.biografy {
+  font-size: 1.5rem;
+  text-align: justify;
+}
+
+.image_container {
+  width: 30%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.profile {
+  border-radius: 50%;
+}
+
+.skill-container {
+  padding: 3rem;
+  height: 39rem;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+}
+
+.head_skill {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 30%;
+  font-size: 7rem;
+  scroll-margin-top: 6.5rem;
+}
+
+.skill_box {
+  width: 100%;
+  height: 70%;
+}
+
+.skill_list {
+  width: 100%;
+  height: 100%;
+
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+
+  gap: 1.5rem;
+
+  border-radius: 50px;
+}
+
+.skill_list li {
+  color: var(--color-primary-500);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 2rem;
+
+  background-color: var(--color-neutral-200);
+  border-radius: 20px;
+
+  transition:
+    background-color 200ms ease-in-out,
+    transform 200ms ease-in-out;
+
+  box-shadow: var(--color-neutral-50) 2px 3px 4px;
+}
+
+.skill_list li:hover {
+  box-shadow: var(--color-neutral-500) 2px 3px 4px;
+  color: var(--color-neutral-100);
+  background-color: var(--color-neutral-400);
+  transform: translateY(-5px);
+}
+
+/* ******************** Footer ******************** */
+.info_connect {
+  padding: 2rem 2rem 0 2rem;
+  height: 39rem;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3.5rem;
+  justify-content: space-between;
+}
+
+.connect_head {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 7rem;
+}
+
+.connect_list {
+  width: 100%;
+
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(1, 1fr);
+
+  gap: 1.5rem;
+
+  border-radius: 50px;
+}
+
+.connect_list li a {
+  padding: 2rem;
+  width: 100%;
+  color: var(--color-primary-500);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background-color: var(--color-neutral-200);
+  border-radius: 20px;
+
+  transition:
+    background-color 200ms ease-in-out,
+    transform 200ms ease-in-out;
+
+  box-shadow: var(--color-neutral-50) 2px 3px 4px;
+}
+
+.connect_list li a:hover {
+  border-radius: 20px;
+  transition:
+    background-color 200ms ease-in-out,
+    transform 200ms ease-in-out;
+  box-shadow: var(--color-neutral-500) 2px 3px 4px;
+  color: var(--color-neutral-100);
+  background-color: var(--color-neutral-400);
+  transform: translateY(-5px);
+}
+
+.copy-right {
+  display: flex;
+  height: 25%;
+  align-items: center;
+  justify-content: center;
+  font-size: medium;
+}
+/* ******************** Responsive ******************** */
+
+/* ──────────────────────────────────────────────
+   تبلت بزرگ و لپتاپ‌های کوچک (max-width: 1280px)
+   ────────────────────────────────────────────── */
+@media (max-width: 1280px) {
+  .hero {
+    padding: 3rem;
+    height: 30rem;
+    gap: 5rem;
+  }
+
+  .main_container {
+    padding: 5rem 3rem;
+  }
+
+  .hero_main_title {
+    scroll-margin-top: 4rem;
+    font-size: 5.5rem;
+  }
+
+  .hero_title {
+    scroll-margin-top: 4rem;
+    font-size: 1.75rem;
+  }
+
+  .biografy {
+    font-size: 1.35rem;
+  }
+
+  .head_skill,
+  .connect_head {
+    scroll-margin-top: 4rem;
+    font-size: 5.5rem;
+  }
+}
+
+/* ──────────────────────────────────────────────
+   تبلت (max-width: 1024px)
+   ────────────────────────────────────────────── */
+@media (max-width: 1024px) {
+  .main_container {
+    padding: 4rem 2rem;
+  }
+
+  .nav_bar {
+    width: 70%;
+  }
+
+  .hero {
+    flex-direction: column-reverse;
+    height: auto;
+    min-height: 39rem;
+    align-items: center;
+    text-align: center;
+    gap: 2rem;
+  }
+
+  .hero_header_container {
+    width: 100%;
+    align-items: center;
+  }
+
+  .image_container {
+    width: 100%;
+  }
+
+  .profile {
+    width: 260px;
+    height: 260px;
+  }
+
+  .hero_main_title {
+    font-size: 4.5rem;
+  }
+
+  .hero_title {
+    font-size: 1.5rem;
+  }
+
+  .biografy {
+    font-size: 1.2rem;
+    max-width: 90%;
+  }
+
+  .skill-container {
+    height: auto;
+    min-height: 30rem;
+  }
+
+  .head_skill {
+    height: auto;
+    padding: 1rem 0;
+    font-size: 4.5rem;
+  }
+
+  .skill_box {
+    height: auto;
+  }
+
+  .skill_list {
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: auto;
+  }
+
+  .connect_head {
+    font-size: 4.5rem;
+    height: auto;
+    padding: 1rem 0;
+  }
+
+  .connect_list {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .info_connect {
+    height: auto;
+    min-height: 30rem;
+    padding-bottom: 2rem;
+  }
+}
+
+/* ──────────────────────────────────────────────
+   موبایل بزرگ (max-width: 768px)
+   ────────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .head {
+    height: 12vh;
+    min-height: 10vh;
+    padding: 0.75rem 0;
+  }
+
+  .nav_bar {
+    width: 90%;
+  }
+
+  .nav_bar_items {
+    gap: 0.75rem;
+    justify-content: center;
+  }
+
+  .nav_bar_items a {
+    padding: 0.4rem 1.5rem;
+    font-size: medium;
+    border-radius: 15px;
+  }
+
+  .main_container {
+    padding: 3rem 1.25rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+    min-height: 35rem;
+    gap: 1.5rem;
+  }
+
+  .hero_main_title {
+    font-size: 3rem;
+    scroll-margin-top: 5rem;
+  }
+
+  .hero_title {
+    font-size: 1.25rem;
+  }
+
+  .biografy {
+    font-size: 1.05rem;
+    max-width: 100%;
+  }
+
+  .profile {
+    width: 200px;
+    height: 200px;
+  }
+
+  .skill-container {
+    padding: 2rem 1rem;
+    min-height: 35rem;
+    gap: 1.5rem;
+  }
+
+  .head_skill {
+    font-size: 3rem;
+    scroll-margin-top: 5rem;
+  }
+
+  .skill_list {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+  }
+
+  .skill_list li {
+    padding: 1.25rem;
+    font-size: 0.95rem;
+  }
+
+  .info_connect {
+    padding: 2rem 1.25rem;
+    min-height: 35rem;
+    gap: 2rem;
+  }
+
+  .connect_head {
+    font-size: 3rem;
+  }
+
+  .connect_list {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+  }
+
+  .connect_list li a {
+    padding: 1.25rem;
+    font-size: 0.95rem;
+  }
+
+  .copy-right {
+    height: auto;
+    padding: 1.5rem 0;
+    font-size: small;
+  }
+}
+
+/* ──────────────────────────────────────────────
+   موبایل کوچک (max-width: 480px)
+   ────────────────────────────────────────────── */
+@media (max-width: 480px) {
+  .nav_bar {
+    width: 100%;
+  }
+
+  .nav_bar_items {
+    flex-wrap: wrap;
+    gap: 1.5rem;
+  }
+
+  .nav_bar_items a {
+    padding: 0.35rem 1rem;
+    font-size: small;
+    border-radius: 12px;
+  }
+
+  .main_container {
+    padding: 2rem 1rem;
+  }
+
+  .hero {
+    padding: 1.5rem 0.5rem;
+  }
+
+  .hero_main_title {
+    font-size: 2.25rem;
+    scroll-margin-top: 4rem;
+  }
+
+  .hero_title {
+    font-size: 1.05rem;
+  }
+
+  .biografy {
+    font-size: 0.95rem;
+  }
+
+  .profile {
+    width: 160px;
+    height: 160px;
+  }
+
+  .skill-container {
+    padding: 1.5rem 0.5rem;
+    gap: 0;
+  }
+
+  .head_skill {
+    font-size: 2.25rem;
+    scroll-margin-top: 3rem;
+  }
+
+  .skill_list {
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+  }
+
+  .skill_list li {
+    padding: 1rem;
+  }
+
+  .info_connect {
+    padding: 1.5rem 1rem;
+    gap: 1.5rem;
+  }
+
+  .connect_head {
+    font-size: 2.25rem;
+  }
+
+  .connect_list {
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+  }
+
+  .connect_list li a {
+    padding: 1rem;
+  }
+
+  .copy-right {
+    font-size: smaller;
+  }
+}
