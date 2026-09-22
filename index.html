@@ -3,104 +3,254 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+
+    <title>محمد حیدری | توسعه‌دهنده فرانت‌اند</title>
+
+    <meta
+      name="description"
+      content="وب‌سایت شخصی محمد حیدری، توسعه‌دهنده فرانت‌اند با تمرکز بر React، رابط کاربری مدرن و تجربه کاربری قابل دسترس."
+    />
+
+    <meta name="color-scheme" content="light dark" />
+    <meta id="theme-color" name="theme-color" content="#f8fafc" />
+
+    <script>
+      (function () {
+        try {
+          document.documentElement.classList.add("js");
+
+          var STORAGE_KEY = "portfolio-theme";
+          var storedTheme = localStorage.getItem(STORAGE_KEY);
+
+          var theme =
+            storedTheme === "dark" || storedTheme === "light"
+              ? storedTheme
+              : window.matchMedia &&
+                  window.matchMedia("(prefers-color-scheme: dark)").matches
+                ? "dark"
+                : "light";
+
+          document.documentElement.setAttribute("data-theme", theme);
+        } catch (error) {}
+      })();
+    </script>
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
     <link
       href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@100..900&display=swap"
       rel="stylesheet"
     />
 
     <link rel="stylesheet" href="css/Style_1.css" />
-    <title>محمد حیدری | فرانت‌اند دولوپر</title>
-    <meta name="description" content="Practice_1 for HTML & CSS" />
   </head>
 
   <body>
-    <header class="head">
-      <div class="head_box">
-        <nav class="nav_bar">
-          <ul class="nav_bar_items">
-            <li><a href="#hero_main_title">معرفی</a></li>
-            <li><a href="#head_skill">مهارت ها</a></li>
-            <li><a href="#info_connect">راه های ارتباطی</a></li>
+    <header class="site-header">
+      <div class="header-inner">
+        <a class="brand" href="#hero">محمد حیدری</a>
+
+        <nav class="site-nav" aria-label="ناوبری اصلی">
+          <ul class="nav-list">
+            <li>
+              <a href="#hero">معرفی</a>
+            </li>
+            <li>
+              <a href="#skills">مهارت‌ها</a>
+            </li>
+            <li>
+              <a href="#contact">ارتباط</a>
+            </li>
           </ul>
         </nav>
+
+        <button
+          id="theme-toggle"
+          class="theme-toggle"
+          type="button"
+          aria-pressed="false"
+          aria-label="تغییر حالت روشن و تاریک"
+        >
+          <svg
+            class="icon icon-sun"
+            aria-hidden="true"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <circle cx="12" cy="12" r="4"></circle>
+            <path d="M12 2v2"></path>
+            <path d="M12 20v2"></path>
+            <path d="m4.93 4.93 1.41 1.41"></path>
+            <path d="m17.66 17.66 1.41 1.41"></path>
+            <path d="M2 12h2"></path>
+            <path d="M20 12h2"></path>
+            <path d="m6.34 17.66-1.41 1.41"></path>
+            <path d="m19.07 4.93-1.41 1.41"></path>
+          </svg>
+
+          <svg
+            class="icon icon-moon"
+            aria-hidden="true"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path>
+          </svg>
+        </button>
       </div>
     </header>
 
-    <main class="main_container">
-      <section class="hero">
-        <div class="hero_header_container">
-          <header class="hero_header">
-            <h1 class="hero_main_title" id="hero_main_title">محمد حیدری</h1>
-            <h2 class="hero_title">فرانت اند دولوپر (React Developer)</h2>
-          </header>
-          <p class="biografy">
-            سلام، من محمد حیدری هستم؛ یک توسعه‌دهنده فرانت‌اند در مسیر یادگیری و
-            رشد مستمر. تمرکز اصلی من بر حل مسائل پیچیده و پیاده‌سازی
-            <strong>کدهایی تمیز، خوانا و ساختاریافته</strong> است تا بتوانم
-            صفحات وبی ساده اما جذاب خلق کنم که به مدرن‌سازی و بهبود عملکرد
-            سایت‌ها کمک کنند. هدف من ارتقای دانش فنی‌ام است و در صورت فراهم شدن
-            شرایط، <em>آماده حضور در محیط‌های کاری حرفه‌ای</em> خواهم بود.
-          </p>
-        </div>
-        <div class="image_container">
-          <img
-            src="Images/profile.jpg"
-            alt="تصویر پروفایل"
-            width="350"
-            height="350"
-            class="profile"
-          />
+    <main id="main">
+      <section
+        id="hero"
+        class="snap-section hero-section"
+        tabindex="-1"
+        aria-label="بخش معرفی"
+      >
+        <div class="container section-scroll">
+          <div class="section-content">
+            <div class="hero-grid">
+              <div class="hero-content">
+                <p class="badge">توسعه‌دهنده فرانت‌اند • React</p>
+
+                <h1 class="hero-title">محمد حیدری</h1>
+
+                <p class="hero-subtitle">
+                  توسعه رابط کاربری مدرن، کد تمیز و تجربه کاربری قابل دسترس
+                </p>
+
+                <p class="hero-bio">
+                  سلام، محمد حیدری هستم؛ توسعه‌دهنده فرانت‌اند با تمرکز بر
+                  یادگیری مستمر، حل مسئله و پیاده‌سازی رابط‌های کاربری ساده،
+                  سریع و ساختاریافته. هدف من ساخت تجربه‌های وبی است که از نظر
+                  فنی تمیز، از نظر ظاهری مدرن و از نظر کاربری قابل دسترس باشند.
+                </p>
+
+                <div class="hero-actions">
+                  <a class="btn btn-primary" href="#contact"> ارتباط با من </a>
+
+                  <a class="btn btn-secondary" href="#skills">
+                    مشاهده مهارت‌ها
+                  </a>
+                </div>
+              </div>
+
+              <figure class="hero-media">
+                <img
+                  src="Images/profile.jpg"
+                  alt="تصویر پروفایل محمد حیدری"
+                  width="350"
+                  height="350"
+                  loading="eager"
+                  decoding="async"
+                />
+              </figure>
+            </div>
+          </div>
         </div>
       </section>
 
-      <section class="skill-container">
-        <h2 class="head_skill" id="head_skill">مهارت های من</h2>
-        <div class="skill_box">
-          <ul class="skill_list">
-            <li>React</li>
-            <li>TypeScript</li>
-            <li>TailwindCss</li>
-            <li>HTML</li>
-            <li>CSS</li>
-            <li>JavaScript</li>
-            <li>WordPress</li>
-            <li>Git & Github</li>
-          </ul>
+      <section
+        id="skills"
+        class="snap-section skills-section"
+        tabindex="-1"
+        aria-label="بخش مهارت‌ها"
+      >
+        <div class="container section-scroll">
+          <div class="section-content">
+            <header class="section-header">
+              <h2>مهارت‌های من</h2>
+              <p>
+                مجموعه‌ای از فناوری‌ها و ابزارهایی که در توسعه پروژه‌های
+                فرانت‌اند از آن‌ها استفاده می‌کنم.
+              </p>
+            </header>
+
+            <ul class="card-grid skills-grid">
+              <li>React</li>
+              <li>TypeScript</li>
+              <li>Tailwind CSS</li>
+              <li>HTML</li>
+              <li>CSS</li>
+              <li>JavaScript</li>
+              <li>WordPress</li>
+              <li>Git &amp; GitHub</li>
+            </ul>
+          </div>
         </div>
       </section>
     </main>
 
-    <footer class="info_connect" id="info_connect">
-      <h2 class="connect_head">ارتباط با من</h2>
-      <ul class="connect_list">
-        <li><a href="mailto:mh348797@gmail.com">ایمیل من</a></li>
-        <li><a href="tel:+989105403918">تماس با من</a></li>
-        <li>
-          <a
-            href="https://github.com/MohammadHeydari2004"
-            target="_blank"
-            rel="noopener"
-            >گیت هاب من</a
-          >
-        </li>
-        <li>
-          <a
-            href="https://www.linkedin.com/in/mohammad-h-6044b8268/"
-            target="_blank"
-            rel="noopener"
-            >لینکدین من</a
-          >
-        </li>
-      </ul>
+    <footer
+      id="contact"
+      class="snap-section contact-section"
+      tabindex="-1"
+      aria-label="بخش ارتباط"
+    >
+      <div class="container section-scroll">
+        <div class="section-content">
+          <header class="section-header">
+            <h2>ارتباط با من</h2>
+            <p>
+              برای همکاری، انجام پروژه یا گفت‌وگو می‌توانید از یکی از راه‌های
+              زیر استفاده کنید.
+            </p>
+          </header>
 
-      <small class="copy-right"
-        >این سایت توسط محمد حیدری ساخته شده است.سال 1405 هجری شمسی ©</small
-      >
+          <ul class="card-grid contact-grid">
+            <li>
+              <a href="mailto:mh348797@gmail.com">
+                <span class="card-title">ایمیل</span>
+                <span class="card-value">mh348797@gmail.com</span>
+              </a>
+            </li>
+
+            <li>
+              <a href="tel:+989105403918">
+                <span class="card-title">تماس</span>
+                <span class="card-value">+98 910 540 3918</span>
+              </a>
+            </li>
+
+            <li>
+              <a
+                href="https://github.com/MohammadHeydari2004"
+                target="_blank"
+                rel="noopener"
+              >
+                <span class="card-title">گیت‌هاب</span>
+                <span class="card-value">MohammadHeydari2004</span>
+              </a>
+            </li>
+
+            <li>
+              <a
+                href="https://www.linkedin.com/in/mohammad-h-6044b8268/"
+                target="_blank"
+                rel="noopener"
+              >
+                <span class="card-title">لینکدین</span>
+                <span class="card-value">Mohammad Heydari</span>
+              </a>
+            </li>
+          </ul>
+
+          <p class="copyright">© ۱۴۰۵ محمد حیدری — تمامی حقوق محفوظ است.</p>
+        </div>
+      </div>
     </footer>
-    <!-- <script src="js/Script_1.js" defer></script> -->
+
+    <script src="js/Script_1.js" defer></script>
   </body>
 </html>
