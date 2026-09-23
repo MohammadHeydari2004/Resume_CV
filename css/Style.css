@@ -1,5 +1,14 @@
+/* ============================================================================
+   سند معماری سیستم طراحی (Design System Architecture Documentation)
+   پروژه: پورتفولیوی شخصی محمد حیدری
+   متدولوژی: Component-Driven CSS با استفاده از ویژگی‌های منطقی (Logical Properties)
+   استراتژی ریسپانسیو: Mobile-First Approach همراه با تایپوگرافی سیال (Fluid Typography)
+   ==========================================================================*/
+
 /* =====================================================
-   Reset & Base
+   ۱. بازنشانی و تنظیمات پایه (Modern Reset & Base Styles)
+   رویکرد: استفاده از Box-Sizing مرزی، حذف مارجین‌های پیش‌فرض مرورگر،
+   و بهینه‌سازی رندر فونت (Font Smoothing) برای نمایش استاندارد در macOS/iOS.
 ===================================================== */
 
 *,
@@ -11,25 +20,31 @@
 }
 
 html {
+  /* اسکرول نرم برای ناوبری با Anchor Linkها */
   scroll-behavior: smooth;
+  /* غیرفعال‌سازی Snap در حالت پیش‌فرض (در دسکتاپ فعال می‌شود) */
   scroll-snap-type: none;
   scroll-padding-top: 0;
 }
 
 body {
   min-height: 100vh;
+  /* جلوگیری از اسکرول افقی ناخواسته */
   overflow-x: hidden;
   font-family: var(--font-body);
+  /* فعال‌سازی تنظیمات اپتیکال فونت Vazirmatn برای خوانایی بهتر */
   font-optical-sizing: auto;
   line-height: 1.8;
   background-color: var(--surface-body);
   color: var(--text-body);
   -webkit-font-smoothing: antialiased;
+  /* ترنزیشن نرم برای تغییر تم (جلوگیری از پرش رنگ یا FOUC در حالت Dark/Light) */
   transition:
     background-color 300ms ease,
     color 300ms ease;
 }
 
+/* تنظیمات پایه برای تصاویر و آیکون‌ها جهت جلوگیری از Overflow */
 img,
 svg {
   display: block;
@@ -40,15 +55,18 @@ img {
   height: auto;
 }
 
+/* حذف استایل‌های پیش‌فرض لینک‌ها برای ارث‌بری از رنگ والد */
 a {
   color: inherit;
   text-decoration: none;
 }
 
+/* حذف بولت‌های لیست */
 ul {
   list-style: none;
 }
 
+/* بازنشانی دکمه‌ها برای ارث‌بری از تایپوگرافی پایه و حذف Border پیش‌فرض */
 button {
   font: inherit;
   color: inherit;
@@ -56,6 +74,12 @@ button {
   border: 0;
   cursor: pointer;
 }
+
+/* =====================================================
+   استانداردهای دسترسی‌پذیری (Accessibility Baselines)
+   - :focus-visible: نمایش حلقه فوکوس تنها هنگام ناوبری با کیبورد.
+   - ::selection: شخصی‌سازی رنگ متن انتخاب‌شده بر اساس توکن‌های طراحی.
+===================================================== */
 
 :focus-visible {
   outline: 3px solid var(--focus-ring);
@@ -69,14 +93,18 @@ button {
 }
 
 /* =====================================================
-   Design Tokens
+   ۲. توکن‌های طراحی (Design Tokens)
+   معماری متغیرها:
+   - Primitive Tokens: رنگ‌های خام (مانند color-primary-500)
+   - Semantic Tokens: متغیرهای معنایی (مانند surface-body, text-strong)
+   این جداسازی امکان تغییر تم (Theming) را بدون دستکاری در منطق کامپوننت‌ها فراهم می‌کند.
 ===================================================== */
 
 :root {
   --font-body: "Vazirmatn", sans-serif;
-
   --app-header-height: 72px;
 
+  /* Primitive Color Tokens (مقیاس رنگی آبی) */
   --color-primary-50: #eff6ff;
   --color-primary-100: #dbeafe;
   --color-primary-200: #bfdbfe;
@@ -92,43 +120,56 @@ button {
   --color-cyan-400: #22d3ee;
   --color-cyan-500: #06b6d4;
 
+  /* Border Radius Tokens */
   --radius-xs: 0.5rem;
   --radius-md: 1rem;
   --radius-lg: 1.75rem;
   --radius-full: 999px;
 
+  /* Semantic Surface Tokens (سطوح و پس‌زمینه‌ها) */
   --surface-body: #f8fafc;
   --surface-card: #ffffff;
   --surface-raised: #f1f5f9;
   --surface-header: rgba(255, 255, 255, 0.92);
 
+  /* Semantic Text Tokens (متون) */
   --text-strong: #0f172a;
   --text-body: #334155;
   --text-muted: #64748b;
 
+  /* Semantic Border Tokens (مرزها) */
   --border: #dbe3ee;
   --border-strong: #c9d6e8;
 
   --primary-strong: var(--color-primary-700);
   --primary-soft: var(--color-primary-50);
 
+  /* Interactive Tokens (دکمه‌ها و اکشن‌ها) */
   --button-bg: var(--color-primary-600);
   --button-bg-hover: var(--color-primary-700);
   --button-text: #ffffff;
 
+  /* Decorative Tokens (افکت‌های بصری) */
   --hero-glow-1: rgba(37, 99, 235, 0.12);
   --hero-glow-2: rgba(6, 182, 212, 0.12);
-
   --focus-ring: rgba(37, 99, 235, 0.35);
-
   --selection-bg: var(--color-primary-200);
   --selection-text: #0f172a;
 
+  /* Elevation Tokens (سایه‌ها) */
   --shadow-xs: 0 1px 2px rgba(15, 23, 42, 0.06);
   --shadow-sm: 0 2px 8px rgba(15, 23, 42, 0.08);
   --shadow-md: 0 8px 20px rgba(15, 23, 42, 0.1);
   --shadow-lg: 0 18px 40px rgba(15, 23, 42, 0.16);
 }
+
+/* --------------------------------------------------------------------------
+   تم تاریک (Dark Mode Semantic Overrides)
+   استراتژی: استفاده از Attribute Selector (html[data-theme="dark"])
+   برای تغییر متغیرهای معنایی بدون نیاز به کلاس‌های مجزا در DOM.
+   همچنین color-scheme: dark به مرورگر می‌فهماند که فرم‌های بومی (Native UI)
+   مانند اسکرول‌بارها و Inputها نیز باید تاریک رندر شوند.
+-------------------------------------------------------------------------- */
 
 html[data-theme="dark"] {
   color-scheme: dark;
@@ -167,16 +208,23 @@ html[data-theme="dark"] {
 }
 
 /* =====================================================
-   Utilities
+   ۳. کلاس‌های کمکی (Utility Classes)
+   استفاده از توابع مدرن CSS مانند min() برای ایجاد کانتینرهای Fluid
+   که بدون نیاز به Media Queryهای متعدد، در تمامی ابعاد صفحه واکنش‌گرا هستند.
 ===================================================== */
 
 .container {
+  /* عرض کانتینر حداکثر 1120px و در صفحات کوچکتر 100% منهای 1.5rem حاشیه */
   width: min(1120px, 100% - 1.5rem);
-  margin-inline: auto;
+  margin-inline: auto; /* استفاده از ویژگی منطقی برای مرکزچین در RTL/LTR */
 }
 
 /* =====================================================
-   Header — Mobile First: Static
+   ۴. سربرگ و ناوبری (Site Header & Navigation)
+   استراتژی چیدمان: Flexbox با استفاده از ویژگی `order` برای تغییر ترتیب بصری
+   عناصر در موبایل بدون تغییر در ساختار DOM (حفظ دسترسی‌پذیری و سئو).
+   ویژگی‌های منطقی (Logical Properties): استفاده از `inline-size` به جای `width`
+   و `inset-block-start` به جای `top` برای سازگاری کامل با Writing Modes.
 ===================================================== */
 
 .site-header {
@@ -267,7 +315,9 @@ html[data-theme="dark"] {
 }
 
 /* =====================================================
-   Theme Toggle
+   ۵. کامپوننت تغییر تم (Theme Toggle Component)
+   تکنیک انیمیشن: استفاده از Grid (`place-items: center`) برای همپوشانی دقیق آیکون‌ها
+   و مدیریت ترنزیشن (Transition) برای چرخش و مقیاس‌پذیری (Scale) آیکون‌ها.
 ===================================================== */
 
 .theme-toggle {
@@ -323,7 +373,10 @@ html[data-theme="dark"] .theme-toggle .icon-moon {
 }
 
 /* =====================================================
-   Sections — Mobile First
+   ۶. بخش‌های اصلی و مدیریت اسکرول (Main Sections & Scroll Snap)
+   استراتژی ارتفاع: استفاده از واحدهای Viewport مدرن (`svh`, `dvh`)
+   برای حل مشکل نوار آدرس مرورگرهای موبایل (Mobile Browser Chrome) که در هنگام اسکرول
+   جمع یا باز می‌شوند و باعث پرش (Jump) در مقدار `100vh` می‌گردند.
 ===================================================== */
 
 .snap-section {
@@ -353,7 +406,11 @@ html[data-theme="dark"] .theme-toggle .icon-moon {
 }
 
 /* =====================================================
-   Hero
+   ۷. بخش معرفی (Hero Section)
+   تکنیک بصری: استفاده از `radial-gradient` برای ایجاد افکت Glow (درخشش)
+   در پس‌زمینه که به صورت پویا با تغییر تم (Dark/Light) تغییر رنگ می‌دهد.
+   تایپوگرافی سیال: استفاده از `clamp()` برای اندازه فونت‌ها جهت جلوگیری از
+   شکست خطوط در ابعاد مختلف صفحه.
 ===================================================== */
 
 .hero-section {
@@ -406,7 +463,7 @@ html[data-theme="dark"] .theme-toggle .icon-moon {
 }
 
 .hero-bio {
-  max-width: 70ch;
+  max-width: 70ch; /* محدودسازی عرض متن برای حفظ خوانایی (Optimal Line Length) */
   text-align: justify;
   color: var(--text-body);
   font-size: 0.95rem;
@@ -473,7 +530,7 @@ html[data-theme="dark"] .theme-toggle .icon-moon {
 
 .hero-media img {
   inline-size: min(280px, 100%);
-  aspect-ratio: 1;
+  aspect-ratio: 1; /* حفظ تناسب ابعاد تصویر به صورت مربعی */
   object-fit: cover;
   border: 4px solid var(--surface-card);
   border-radius: 2rem;
@@ -482,7 +539,10 @@ html[data-theme="dark"] .theme-toggle .icon-moon {
 }
 
 /* =====================================================
-   Section Header
+   ۸. هدر بخش‌ها و کارت‌ها (Section Headers & Cards)
+   ویژگی `unicode-bidi: plaintext`: برای جلوگیری از به‌هم‌ریختگی متن‌های LTR
+   (مانند ایمیل و شماره تماس) در محیط RTL. این یک تکنیک حیاتی برای فرم‌ها و 
+   اطلاعات تماس در وب‌سایت‌های فارسی است.
 ===================================================== */
 
 .section-header {
@@ -492,7 +552,7 @@ html[data-theme="dark"] .theme-toggle .icon-moon {
   text-align: center;
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  gap: 1.5rem;
 }
 
 .section-header h2 {
@@ -506,10 +566,6 @@ html[data-theme="dark"] .theme-toggle .icon-moon {
   color: var(--text-muted);
   font-size: 0.95rem;
 }
-
-/* =====================================================
-   Cards
-===================================================== */
 
 .card-grid {
   display: grid;
@@ -556,13 +612,13 @@ html[data-theme="dark"] .theme-toggle .icon-moon {
 
 .card-value {
   direction: ltr;
-  unicode-bidi: plaintext;
+  unicode-bidi: plaintext; /* جلوگیری از شکست Bidirectional در متون انگلیسی/اعداد */
   color: var(--primary-strong);
   font-weight: 800;
 }
 
 /* =====================================================
-   Footer / Contact
+   ۹. پاورقی (Footer / Contact)
 ===================================================== */
 
 .contact-section {
@@ -577,7 +633,13 @@ html[data-theme="dark"] .theme-toggle .icon-moon {
 }
 
 /* =====================================================
-   Responsive — Mobile First Approach
+   ۱۰. سیستم نقاط شکست (Responsive Breakpoints System)
+   رویکرد: Mobile-First (شروع از موبایل و افزودن پیچیدگی در ابعاد بزرگتر).
+   - 425px:  موبایل متوسط (تغییر چیدمان ناوبری)
+   - 560px:  موبایل بزرگ / تبلت کوچک (فعال‌سازی Grid دو ستونه)
+   - 760px:  تبلت (تغییر هدر به حالت Sticky و فعال‌سازی Backdrop Filter)
+   - 900px:  دسکتاپ (فعال‌سازی Scroll Snap و چیدمان‌های پیچیده)
+   - 1120px: دسکتاپ بزرگ (حداکثر عرض کانتینر)
 ===================================================== */
 
 /* ──────────────────────────────────────────────
@@ -593,11 +655,9 @@ html[data-theme="dark"] .theme-toggle .icon-moon {
   .brand {
     order: 1;
   }
-
   .theme-toggle {
     order: 2;
   }
-
   .site-nav {
     order: 3;
     inline-size: 100%;
@@ -626,10 +686,7 @@ html[data-theme="dark"] .theme-toggle .icon-moon {
 ────────────────────────────────────────────── */
 
 @media (min-width: 560px) {
-  .container {
-    width: min(1120px, 100% - 2rem);
-  }
-
+  .container,
   .header-inner {
     width: min(1120px, 100% - 2rem);
   }
@@ -643,23 +700,16 @@ html[data-theme="dark"] .theme-toggle .icon-moon {
     inline-size: auto;
   }
 
-  .card-grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 0.85rem;
-  }
-
-  .skills-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
+  .card-grid,
+  .skills-grid,
   .contact-grid {
     grid-template-columns: repeat(2, 1fr);
+    gap: 0.85rem;
   }
 
   .hero-bio {
     font-size: 1rem;
   }
-
   .copyright {
     font-size: 0.9rem;
   }
@@ -678,6 +728,7 @@ html[data-theme="dark"] .theme-toggle .icon-moon {
   .site-header {
     position: sticky;
     inset-block-start: 0;
+    /* افکت Glassmorphism برای هدر چسبان */
     backdrop-filter: blur(16px);
     -webkit-backdrop-filter: blur(16px);
     box-shadow: var(--shadow-xs);
@@ -692,15 +743,20 @@ html[data-theme="dark"] .theme-toggle .icon-moon {
 
   .brand {
     order: 0;
+    font-size: 1.1rem;
   }
-
   .site-nav {
     order: 0;
     inline-size: auto;
   }
-
   .theme-toggle {
     order: 0;
+    inline-size: 2.75rem;
+    block-size: 2.75rem;
+  }
+  .theme-toggle .icon {
+    inline-size: 1.15rem;
+    block-size: 1.15rem;
   }
 
   .nav-list {
@@ -713,20 +769,6 @@ html[data-theme="dark"] .theme-toggle .icon-moon {
   .nav-list a {
     padding: 0.55rem 1.2rem;
     font-size: 1rem;
-  }
-
-  .theme-toggle {
-    inline-size: 2.75rem;
-    block-size: 2.75rem;
-  }
-
-  .theme-toggle .icon {
-    inline-size: 1.15rem;
-    block-size: 1.15rem;
-  }
-
-  .brand {
-    font-size: 1.1rem;
   }
 
   .hero-grid {
@@ -742,11 +784,9 @@ html[data-theme="dark"] .theme-toggle .icon-moon {
     grid-template-columns: repeat(3, 1fr);
     gap: 1rem;
   }
-
   .skills-grid {
     grid-template-columns: repeat(4, 1fr);
   }
-
   .contact-grid {
     grid-template-columns: repeat(2, 1fr);
   }
@@ -754,7 +794,6 @@ html[data-theme="dark"] .theme-toggle .icon-moon {
   .section-header {
     padding-block-end: 2rem;
   }
-
   .section-header p {
     font-size: 1rem;
   }
@@ -766,6 +805,7 @@ html[data-theme="dark"] .theme-toggle .icon-moon {
 
 @media (min-width: 900px) {
   html {
+    /* فعال‌سازی Scroll Snap برای تجربه Full-Page در دسکتاپ */
     scroll-snap-type: y mandatory;
   }
 
@@ -782,14 +822,15 @@ html[data-theme="dark"] .theme-toggle .icon-moon {
   .section-scroll {
     min-height: 0;
     overflow-y: auto;
+    /* جلوگیری از Layout Shift هنگام نمایش اسکرول‌بار */
     scrollbar-gutter: stable;
     justify-content: center;
   }
 
+  /* استایل‌دهی سفارشی به اسکرول‌بار (مخصوص مرورگرهای Webkit) */
   .section-scroll::-webkit-scrollbar {
     width: 8px;
   }
-
   .section-scroll::-webkit-scrollbar-thumb {
     border-radius: 999px;
     background-color: var(--border-strong);
@@ -815,24 +856,17 @@ html[data-theme="dark"] .theme-toggle .icon-moon {
     font-size: 1.05rem;
   }
 
-  .card-grid {
-    grid-template-columns: repeat(4, 1fr);
-    gap: 1rem;
-  }
-
-  .skills-grid {
-    grid-template-columns: repeat(4, 1fr);
-  }
-
+  .card-grid,
+  .skills-grid,
   .contact-grid {
     grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
   }
 
   .skills-grid li,
   .contact-grid a {
     padding: 1.25rem;
   }
-
   .card-title {
     font-size: 0.9rem;
   }
@@ -851,14 +885,16 @@ html[data-theme="dark"] .theme-toggle .icon-moon {
   .container {
     width: min(1120px, 100% - 2.5rem);
   }
-
   .header-inner {
     width: min(1120px, 100% - 2rem);
   }
 }
 
 /* =====================================================
-   Reduced Motion
+   ۱۱. دسترسی‌پذیری حرکتی و خروجی چاپ (A11y Motion & Print Media)
+   - prefers-reduced-motion: احترام به تنظیمات سیستم‌عامل کاربر برای حذف انیمیشن‌ها
+     جهت جلوگیری از سرگیجه یا مشکلات تمرکز در کاربران حساس.
+   - Print: بهینه‌سازی ساختار برای چاپ روی کاغذ (حذف اسکرول‌های داخلی و هدر چسبان).
 ===================================================== */
 
 @media (prefers-reduced-motion: reduce) {
@@ -874,10 +910,6 @@ html[data-theme="dark"] .theme-toggle .icon-moon {
     transition-duration: 0.01ms !important;
   }
 }
-
-/* =====================================================
-   Print
-===================================================== */
 
 @media print {
   html {

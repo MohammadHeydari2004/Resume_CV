@@ -1,4 +1,12 @@
 <!doctype html>
+<!--
+================================================================================
+  سند معماری و مستندات درون‌کدی (In-Code Documentation)
+  پروژه: پورتفولیوی شخصی محمد حیدری
+  معماری: HTML5 Semantic, Mobile-First, Accessible (WCAG 2.1)
+  استراتژی رندر: Critical Rendering Path Optimization
+================================================================================
+-->
 <html lang="fa" dir="rtl">
   <head>
     <meta charset="UTF-8" />
@@ -6,22 +14,41 @@
 
     <title>محمد حیدری | توسعه‌دهنده فرانت‌اند</title>
 
+    <!-- 
+      [سئو و متادیتا]
+      تعریف دقیق Description برای CTR بهتر در نتایج جستجو.
+    -->
     <meta
       name="description"
       content="وب‌سایت شخصی محمد حیدری، توسعه‌دهنده فرانت‌اند با تمرکز بر React، رابط کاربری مدرن و تجربه کاربری قابل دسترس."
     />
 
+    <!-- 
+      [یکپارچگی بصری مرورگر]
+      پشتیبانی از Dark Mode در سطح سیستم‌عامل و تنظیم نوار آدرس مرورگرهای موبایل.
+    -->
     <meta name="color-scheme" content="light dark" />
     <meta id="theme-color" name="theme-color" content="#f8fafc" />
 
+    <!--
+    ============================================================================
+      ماژول مدیریت تم (Theme Management - FOUC Prevention)
+      استراتژی معماری: اجرای همگام (Synchronous) و Inline درون تگ <head>
+      دلیل فنی: جلوگیری از پدیده FOUC (Flash of Unstyled Content).
+      در صورت استفاده از فایل خارجی یا ویژگی defer، کاربر برای کسری از ثانیه
+      تم پیش‌فرض مرورگر را پیش از اعمال تم ذخیره‌شده در LocalStorage مشاهده خواهد کرد.
+    ============================================================================
+    -->
     <script>
       (function () {
         try {
+          // افزودن کلاس js به ریشه برای فعال‌سازی استایل‌های وابسته به جاوااسکریپت در CSS
           document.documentElement.classList.add("js");
 
           var STORAGE_KEY = "portfolio-theme";
           var storedTheme = localStorage.getItem(STORAGE_KEY);
 
+          // منطق Fall-back: اولویت با تم ذخیره‌شده کاربر، سپس ترجیحات OS و در نهایت تم روشن
           var theme =
             storedTheme === "dark" || storedTheme === "light"
               ? storedTheme
@@ -31,13 +58,25 @@
                 : "light";
 
           document.documentElement.setAttribute("data-theme", theme);
-        } catch (error) {}
+        } catch (error) {
+          // مدیریت خطا در صورت غیرفعال بودن LocalStorage (مثلاً در حالت Incognito برخی مرورگرها)
+          console.warn("Theme initialization failed:", error);
+        }
       })();
     </script>
 
+    <!--
+      [بهینه‌سازی عملکرد شبکه (Network Performance)]
+      استفاده از Preconnect برای برقراری ارتباط زودهنگام (DNS Lookup + TCP Handshake + TLS Negotiation)
+      با سرورهای گوگل فونت، پیش از درخواست فایل CSS. این کار شاخص TTFB را بهبود می‌بخشد.
+    -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 
+    <!--
+      استفاده از Variable Fonts (wght@100..900) برای کاهش تعداد Requestهای شبکه
+      و دانلود تنها یک فایل فونت به جای چندین فایل مجزا برای وزن‌های مختلف.
+    -->
     <link
       href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@100..900&display=swap"
       rel="stylesheet"
@@ -47,22 +86,28 @@
   </head>
 
   <body>
+    <!--
+    ============================================================================
+      سربرگ و ناوبری اصلی (Site Header & Main Navigation)
+      رویکرد دسترسی‌پذیری (a11y): استفاده از aria-label برای تمایز این Landmark
+      از سایر ناوبری‌های احتمالی جهت تسهیل کار با Screen Readerها.
+    ============================================================================
+    -->
     <header class="site-header">
       <div class="header-inner">
         <nav class="site-nav" aria-label="ناوبری اصلی">
           <ul class="nav-list">
-            <li>
-              <a href="#hero">معرفی</a>
-            </li>
-            <li>
-              <a href="#skills">مهارت‌ها</a>
-            </li>
-            <li>
-              <a href="#contact">ارتباط</a>
-            </li>
+            <li><a href="#hero">معرفی</a></li>
+            <li><a href="#skills">مهارت‌ها</a></li>
+            <li><a href="#contact">ارتباط</a></li>
           </ul>
         </nav>
 
+        <!--
+          کامپوننت تغییر تم (Theme Toggle Component)
+          - aria-pressed: اعلام وضعیت فعلی دکمه به فناوری‌های کمکی.
+          - aria-hidden="true" روی SVGها: جلوگیری از خوانده شدن کدهای XML توسط صفحه‌خوان‌ها.
+        -->
         <button
           id="theme-toggle"
           class="theme-toggle"
@@ -110,6 +155,13 @@
     </header>
 
     <main id="main">
+      <!--
+      ============================================================================
+        محتوای اصلی - بخش معرفی (Hero Section)
+        - tabindex="-1": مدیریت تمرکز (Focus Management) هنگام ناوبری با Anchor Linkها.
+        - loading="eager": اولویت‌دهی به لود تصویر پروفایل جهت بهبود شاخص LCP در Core Web Vitals.
+      ============================================================================
+      -->
       <section
         id="hero"
         class="snap-section hero-section"
@@ -121,13 +173,10 @@
             <div class="hero-grid">
               <div class="hero-content">
                 <p class="badge">توسعه‌دهنده فرانت‌اند • React</p>
-
                 <h1 class="hero-title">محمد حیدری</h1>
-
                 <p class="hero-subtitle">
                   توسعه رابط کاربری مدرن، کد تمیز و تجربه کاربری قابل دسترس
                 </p>
-
                 <p class="hero-bio">
                   سلام، محمد حیدری هستم؛ توسعه‌دهنده فرانت‌اند با تمرکز بر
                   یادگیری مستمر، حل مسئله و پیاده‌سازی رابط‌های کاربری ساده،
@@ -137,7 +186,6 @@
 
                 <div class="hero-actions">
                   <a class="btn btn-primary" href="#contact"> ارتباط با من </a>
-
                   <a class="btn btn-secondary" href="#skills">
                     مشاهده مهارت‌ها
                   </a>
@@ -159,6 +207,11 @@
         </div>
       </section>
 
+      <!--
+        بخش مهارت‌ها (Skills Section)
+        معماری UI: استفاده از CSS Grid برای چیدمان ریسپانسیو کارت‌ها.
+        (نکته: تایپوگرافی C# و C++ و RESTful در لیست زیر جهت حفظ پرستیژ حرفه‌ای اصلاح شد).
+      -->
       <section
         id="skills"
         class="snap-section skills-section"
@@ -175,10 +228,10 @@
               </p>
             </header>
 
-            <ul class="card-grid skills-grid">
+            <ul class="card-grid skills-grid" dir="ltr">
               <li>React</li>
               <li>React-related libraries such as React Router and Axios</li>
-              <li>RESTfull APIs</li>
+              <li>RESTful APIs</li>
               <li>TypeScript</li>
               <li>TailwindCSS</li>
               <li>Git &amp; GitHub</li>
@@ -191,9 +244,9 @@
               <li>OOP</li>
               <li>VS Code</li>
               <li>Vite</li>
-              <li>#C</li>
+              <li>C#</li>
               <li>Python</li>
-              <li>++C</li>
+              <li>C++</li>
               <li>SQL Server</li>
             </ul>
           </div>
@@ -201,6 +254,13 @@
       </section>
     </main>
 
+    <!--
+    ============================================================================
+      پاورقی و اطلاعات تماس (Footer & Contact Info)
+      امنیت: استفاده از rel="noopener" برای لینک‌های خارجی (target="_blank")
+      جهت جلوگیری از حملات Reverse Tabnabbing و دسترسی پنجره مقصد به window.opener.
+    ============================================================================
+    -->
     <footer
       id="contact"
       class="snap-section contact-section"
@@ -260,6 +320,10 @@
       </div>
     </footer>
 
+    <!--
+      بارگذاری اسکریپت اصلی: استفاده از ویژگی defer برای تضمین اجرای کدهای جاوااسکریپت
+      تنها پس از پارس کامل DOM (DOM Parsing) و جلوگیری از مسدود شدن رندر صفحه (Render-Blocking).
+    -->
     <script src="js/Script.js" defer></script>
   </body>
 </html>
